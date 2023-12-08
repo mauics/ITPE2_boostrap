@@ -29,42 +29,79 @@
         </div>
     </nav>
 
+    <div class="container">
+        <div class="mt-3">
+            <h2>Product List</h2>
+            <div class="row" id="productList"></div>
+        </div>
+        <div id="productImages"></div>
+    </div>
+
+
     <!-- Add Product Modal -->
-    <div class="modal" id="addProductModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="addProductModalLabel">Add Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Form to add a new product -->
+       
                     <form id="addProductForm">
                         <div class="mb-3">
-                            <label for="productName" class="form-label">Product Name:</label>
+                            <label for="productName" class="form-label">Product Name</label>
                             <input type="text" class="form-control" id="productName" required>
                         </div>
                         <div class="mb-3">
-                            <label for="productPrice" class="form-label">Product Price:</label>
-                            <input type="number" class="form-control" id="productPrice" step="0.01" required>
+                            <label for="productPrice" class="form-label">Product Price</label>
+                            <input type="number" class="form-control" id="productPrice" required>
                         </div>
                         <div class="mb-3">
-                            <label for="productPhoto" class="form-label">Product Photo:</label>
-                            <input type="file" class="form-control" id="productPhoto" accept="image/*" required>
+                            <label for="productImage" class="form-label">Product Image</label>
+                            <input type="file" class="form-control" id="productImage" accept="image/*" required>
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="addProduct()">Add Product</button>
+                        <button type="submit" class="btn btn-primary">Add Product</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Edit Product Modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              
+                <form id="editProductForm">
+                    <div class="mb-3">
+                        <label for="editProductName" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="editProductName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editProductPrice" class="form-label">Product Price</label>
+                        <input type="number" class="form-control" id="editProductPrice" required>
+                    </div>
+                   
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="seller_dashboard.js"></script>
+
+    <script src="Seller.js"></script>
+
 </body>
 </html>

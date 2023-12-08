@@ -35,7 +35,7 @@ body {
     padding: 20px;
 }
 
-/* Additional styling for the product list */
+
 #productList {
     margin-top: 20px;
 }
@@ -55,4 +55,22 @@ body {
 img {
     width: 10%;
     height: 10%;
+}
+
+#productList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#productList li {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#productImages img {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
 }
