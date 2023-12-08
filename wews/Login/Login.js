@@ -85,9 +85,8 @@ function registerUser() {
     localStorage.setItem('userPassword', password);
     localStorage.setItem('userConfirmPassword', confirmPassword);
     localStorage.setItem('userAddress', address);
-    localStorage.setItem('userGender', gender); 
-    localStorage.setItem('userBirthday', birthday)    
-
+    localStorage.setItem('userGender', gender);
+    localStorage.setItem('userBirthday', birthday);
     
 
 
@@ -118,7 +117,7 @@ function loginUser() {
                 window.location.href = '../Main/Main.html';
             } else if (userRole === 'seller') {
                 // Redirect to the seller page
-                window.location.href = '../Welcome/Welcome.html';
+                window.location.href = '../Seller/Seller.html';
             } else {
                 console.log('Invalid user role.');
             }
