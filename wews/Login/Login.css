@@ -122,3 +122,8 @@ body {
 label {
     color: #000000;
 }
+
+img {
+    width: 10%;
+    height: 10%;
+}

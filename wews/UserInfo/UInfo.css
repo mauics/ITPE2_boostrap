@@ -138,3 +138,8 @@ select {
 #cancel-delete-button:hover {
     background-color: #c82333;
 }
+
+img {
+    width: 10%;
+    height: 10%;
+}
