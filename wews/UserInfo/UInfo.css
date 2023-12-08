@@ -2,6 +2,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
     color: #333;
+    background: url('../assets/photo2.png') no-repeat center center fixed;
+    background-size: cover;
 }
 
 /* Top Navigation Bar */
@@ -142,4 +144,11 @@ select {
 img {
     width: 10%;
     height: 10%;
+}
+.userinf{
+  
+    background-color: #d6d6d6;
+    margin: 2%;
+    border: none;
+    padding: 30px;
 }
