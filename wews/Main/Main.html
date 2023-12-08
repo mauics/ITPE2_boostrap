@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Main.css"> 
+    <title>Kangkong Chips Shop</title>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Kangkong Chips Shop</a>
+        <button class="btn btn-outline-light my-2 my-sm-0 ml-auto" data-toggle="modal" data-target="#cartModal">
+            <i class="fas fa-shopping-cart"></i> Cart
+            <span id="cart-counter" class="badge badge-pill badge-warning">0</span>
+        </button>
+    </nav>
+    </nav>
+
+    <!-- Banner Section -->
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Delicious Kangkong Chips</h1>
+        <p class="lead">Satisfy your cravings with our crispy and flavorful kangkong chips.</p>
+    </div>
+
+    <!-- Product Section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <img src="../assets/kangkong_chip_image1.jpg" class="card-img-top" alt="Kangkong Chip 1">
+                    <div class="card-body">
+                        <h2 class="card-title">Original Flavor</h2>
+                        <p class="card-text">Enjoy the classic taste of kangkong chips with our original flavor.</p>
+                        <button class="btn btn-primary add-to-cart" data-product="Original Flavor">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <img src="../assets/SOUR-CREAM.jpg" class="card-img-top" alt="Kangkong Chip 1">
+                    <div class="card-body">
+                        <h2 class="card-title">Sour Cream</h2>
+                        <p class="card-text">Enjoy the Sour Creamtaste of kangkong chips with our original flavor.</p>
+                        <button class="btn btn-primary add-to-cart" data-product="Sour Cream">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <img src="../assets/CHEESE.jpg" class="card-img-top" alt="Kangkong Chip 1">
+                    <div class="card-body">
+                        <h2 class="card-title">Cheese</h2>
+                        <p class="card-text">Enjoy the Cheese taste of kangkong chips with our original flavor.</p>
+                        <button class="btn btn-primary add-to-cart" data-product="Cheese">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="modal" id="cartModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Shopping Cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul id="cart-items-modal" class="list-group">
+                    <!-- Cart items will be added -->
+                </ul>
+                <h5>Total: $<span id="cart-total-modal">0.00</span></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary checkout" data-dismiss="modal">Checkout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2023 Kangkong Chips Shop</p>
+    </footer>
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--  JavaScript  -->
+    <script src="Main.js"></script> 
+</body>
+</html>

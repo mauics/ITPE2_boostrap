@@ -1,0 +1,50 @@
+/* Body */
+body {
+    font-family: 'Helvetica', sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Navigation Bar  */
+.navbar {
+    background-color: #343a40;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Welcome Section  */
+.jumbotron {
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('welcome-background.jpg') center/cover;
+    padding: 4rem 2rem;
+    color: #343a40;
+}
+
+.display-4 {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.lead {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Footer  */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 2rem 0;
+    text-align: center;
+}

@@ -1,0 +1,96 @@
+/* Body  */
+body {
+    font-family: 'Helvetica', sans-serif;
+    background-color: #f8f9fa;
+    padding-top: 56px; 
+}
+
+/* Navigation Bar  */
+.navbar {
+    background-color: #343a40;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Jumbotron */
+.jumbotron {
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('background.jpg') center/cover;
+    padding: 4rem 2rem;
+    border-bottom: 1px solid #dee2e6;
+    color: #343a40;
+    text-align: center;
+}
+
+.jumbotron h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.jumbotron p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Product card  */
+.card {
+    border: none;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Shopping Cart  */
+#cart-counter {
+    background-color: #ffc107;
+    color: #343a40;
+    font-weight: bold;
+}
+
+#cartModal {
+    margin-top: 56px; 
+}
+
+.modal-content {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    background-color: #343a40;
+    color: #ffffff;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+}
+
+/* Footer  */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 2rem 0;
+    text-align: center;
+}
