@@ -1,5 +1,6 @@
 const storedUserInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
         const editModal = document.getElementById('edit-modal');
+        const deleteModal = document.getElementById('delete-modal');
         const pictureInput = document.getElementById('edit-picture');
         const fullNameInput = document.getElementById('edit-fullName');
         const emailInput = document.getElementById('edit-email');
@@ -9,6 +10,7 @@ const storedUserInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
         const currentPasswordInput = document.getElementById('edit-currentPassword');
         const newPasswordInput = document.getElementById('edit-newPassword');
         const confirmNewPasswordInput = document.getElementById('edit-confirmNewPassword');
+        const deletePasswordInput = document.getElementById('delete-password');
 
         document.getElementById('user-picture').src = storedUserInfo.picture || 'default.jpg';
         document.getElementById('fullName').innerText = storedUserInfo.fullName || 'John Doe';
@@ -29,6 +31,38 @@ const storedUserInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
             confirmNewPasswordInput.value = ''; // Clear the confirm new password input
 
             editModal.style.display = 'flex';
+        }
+
+        function closeEditModal() {
+            editModal.style.display = 'none';
+        }
+
+        function openDeleteModal() {
+            deletePasswordInput.value = ''; // Clear the delete password input
+            deleteModal.style.display = 'flex';
+        }
+
+        function closeDeleteModal() {
+            deleteModal.style.display = 'none';
+        }
+
+        function confirmDelete() {
+            // Check if the delete password matches the stored password
+            if (deletePasswordInput.value !== storedUserInfo.password) {
+                alert('Incorrect password. Account not deleted.');
+                closeDeleteModal();
+                return;
+            }
+
+            // Delete the user account from local storage
+            localStorage.removeItem('userInfo');
+
+            // Close the delete modal
+            closeDeleteModal();
+
+            // Redirect to a thank you or login page
+            alert('Account deleted. Redirecting to thank you page or login page.');
+            // You may want to redirect to another page or perform additional actions here.
         }
 
         function saveUserInformation() {
@@ -64,8 +98,8 @@ const storedUserInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
             document.getElementById('gender').innerText = newUserInfo.gender;
             document.getElementById('dob').innerText = newUserInfo.dob;
 
-            // Close the modal
-            editModal.style.display = 'none';
+            // Close the edit modal
+            closeEditModal();
         }
 
         function getImageDataUrl(file) {

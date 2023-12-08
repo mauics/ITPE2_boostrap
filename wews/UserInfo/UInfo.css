@@ -8,7 +8,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    font-size: 14px;
+    
 }
 
 #user-info-container {
@@ -46,16 +46,24 @@ body {
     color: #fff;
 }
 
-#edit-button {
+#edit-button,
+#delete-button {
     background-color: #3498db;
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 10px;
 }
 
-#edit-modal {
+#edit-button:hover,
+#delete-button:hover {
+    background-color: #2c3e50;
+}
+
+#edit-modal,
+#delete-modal {
     display: none;
     position: fixed;
     top: 0;
@@ -67,16 +75,19 @@ body {
     align-items: center;
 }
 
-#edit-form {
+#edit-form,
+#delete-form {
     background-color: #333;
     padding: 20px;
     border-radius: 8px;
     max-width: 400px;
     width: 100%;
     text-align: center;
+    font-size: 13px;
 }
 
-#edit-form label {
+#edit-form label,
+#delete-form label {
     display: block;
     margin-bottom: 10px;
     color: #fff;
@@ -84,31 +95,44 @@ body {
 }
 
 #edit-form input,
-#edit-form select {
+#edit-form select,
+#delete-form input {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
     box-sizing: border-box;
 }
 
-#edit-form input[type="file"] {
+#edit-form input[type="file"],
+#delete-form input[type="password"] {
     margin-bottom: 5px;
 }
 
-#edit-form .row {
+#edit-form .row,
+#delete-form .row {
     display: flex;
     justify-content: space-between;
 }
 
-#edit-form .row > div {
+#edit-form .row > div,
+#delete-form .row > div {
     width: 48%;
 }
 
-#save-button {
+#save-button,
+#cancel-edit-button,
+#confirm-delete-button,
+#cancel-delete-button {
     background-color: #2ecc71;
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+#cancel-edit-button,
+#cancel-delete-button {
+    background-color: #e74c3c;
+    margin-right: 10px;
 }

@@ -16,6 +16,7 @@
             <p><strong>Gender:</strong> <span id="gender"></span></p>
             <p><strong>Date of Birth:</strong> <span id="dob"></span></p>
             <button id="edit-button" onclick="openEditModal()">Edit</button>
+            <button id="delete-button" onclick="openDeleteModal()">Delete Account</button>
         </div>
     </div>
 
@@ -59,8 +60,24 @@
             <input type="password" id="edit-confirmNewPassword" placeholder="Confirm new password">
 
             <button id="save-button" onclick="saveUserInformation()">Save Changes</button>
+            <button id="cancel-edit-button" onclick="closeEditModal()">Cancel</button>
         </div>
     </div>
+
+    <div id="delete-modal">
+        <div id="delete-form">
+            <h2>Delete Account</h2>
+            <p>Are you sure you want to delete your account?</p>
+            <label for="delete-password">Enter your password to confirm:</label>
+            <input type="password" id="delete-password" placeholder="Enter your password">
+            <div class="row">
+                <button id="confirm-delete-button" onclick="confirmDelete()">Delete Account</button>
+                <button id="cancel-delete-button" onclick="closeDeleteModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <script src="UInfo.js"></script>
+
 </body>
 </html>
