@@ -2,13 +2,16 @@
 body {
     font-family: 'Helvetica', sans-serif;
     background-color: #f8f9fa;
-    padding-top: 56px; 
+   
+    background: url('../assets/photo2.png') no-repeat center center fixed;
+    background-size: cover;
 }
 
 /* Navigation Bar  */
 .navbar {
     background-color: #343a40;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex   ;
 }
 
 .navbar-brand {

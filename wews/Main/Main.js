@@ -107,15 +107,14 @@ function updateCart() {
     cart.forEach((item, index) => {
         const listItem = document.createElement('li');
         listItem.className = 'list-group-item';
-
-        listItem.innerHTML += `${item.product.name} - $${item.product.price.toFixed(2)} each - Quantity: ${item.quantity}`;
+    
+        listItem.innerHTML += `${item.product.name} - ₱&nbsp;${(item.product.price * item.quantity).toFixed(2)} each - Quantity: ${item.quantity}`;
         listItem.innerHTML += ` <button class="btn btn-success btn-sm increase-quantity" data-index="${index}">+</button>`;
         listItem.innerHTML += ` <button class="btn btn-warning btn-sm decrease-quantity" data-index="${index}">-</button>`;
         listItem.innerHTML += ` <button class="btn btn-danger btn-sm remove-from-cart" data-index="${index}">X</button>`;
-
+    
         cartItems.appendChild(listItem);
     });
-
     // Calculate and display total
     const total = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
     cartTotal.textContent = total.toFixed(2);

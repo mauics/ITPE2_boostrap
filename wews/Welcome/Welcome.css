@@ -81,3 +81,7 @@ footer {
 .row{   
     justify-content: center;
 }
+img {
+    width: 10%;
+    height: 10%;
+}
