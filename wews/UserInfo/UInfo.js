@@ -1,114 +1,121 @@
-const storedUserInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
-        const editModal = document.getElementById('edit-modal');
-        const deleteModal = document.getElementById('delete-modal');
-        const pictureInput = document.getElementById('edit-picture');
-        const fullNameInput = document.getElementById('edit-fullName');
-        const emailInput = document.getElementById('edit-email');
-        const currentAddressInput = document.getElementById('edit-currentAddress');
-        const genderInput = document.getElementById('edit-gender');
-        const dobInput = document.getElementById('edit-dob');
-        const currentPasswordInput = document.getElementById('edit-currentPassword');
-        const newPasswordInput = document.getElementById('edit-newPassword');
-        const confirmNewPasswordInput = document.getElementById('edit-confirmNewPassword');
-        const deletePasswordInput = document.getElementById('delete-password');
+// Function to save user information to Local Storage
+function saveUserInformation() {
+    // Get input values
+    var fullName = document.getElementById('edit-fullName').value;
+    var email = document.getElementById('edit-email').value;
+    var currentAddress = document.getElementById('edit-currentAddress').value;
+    var gender = document.querySelector('input[name="edit-gender"]:checked').value;
+    var dob = document.getElementById('edit-dob').value;
 
-        document.getElementById('user-picture').src = storedUserInfo.picture || 'default.jpg';
-        document.getElementById('fullName').innerText = storedUserInfo.fullName || 'John Doe';
-        document.getElementById('email').innerText = storedUserInfo.email || 'john.doe@example.com';
-        document.getElementById('currentAddress').innerText = storedUserInfo.currentAddress || '123 Main St, Cityville';
-        document.getElementById('gender').innerText = storedUserInfo.gender || 'Male';
-        document.getElementById('dob').innerText = storedUserInfo.dob || 'January 1, 1990';
+    // Save user information to Local Storage
+    localStorage.setItem('userFullName', fullName);
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userCurrentAddress', currentAddress);
+    localStorage.setItem('userGender', gender);
+    localStorage.setItem('userDob', dob);
 
-        function openEditModal() {
-            pictureInput.value = ''; // Clear the file input
-            fullNameInput.value = storedUserInfo.fullName || '';
-            emailInput.value = storedUserInfo.email || '';
-            currentAddressInput.value = storedUserInfo.currentAddress || '';
-            genderInput.value = storedUserInfo.gender || '';
-            dobInput.value = storedUserInfo.dob || '';
-            currentPasswordInput.value = ''; // Clear the current password input
-            newPasswordInput.value = ''; // Clear the new password input
-            confirmNewPasswordInput.value = ''; // Clear the confirm new password input
+    // Update the displayed user information
+    updateUserInfo();
 
-            editModal.style.display = 'flex';
-        }
+    // Close the edit modal
+    $('#edit-modal').modal('hide');
+}
 
-        function closeEditModal() {
-            editModal.style.display = 'none';
-        }
+// Function to update user information on the page
+function updateUserInfo() {
+    // Get elements
+    var fullNameElement = document.getElementById('fullName');
+    var emailElement = document.getElementById('email');
+    var currentAddressElement = document.getElementById('currentAddress');
+    var genderElement = document.getElementById('gender');
+    var dobElement = document.getElementById('dob');
 
-        function openDeleteModal() {
-            deletePasswordInput.value = ''; // Clear the delete password input
-            deleteModal.style.display = 'flex';
-        }
+    // Get user information from Local Storage
+    var storedFullName = localStorage.getItem('userFullName');
+    var storedEmail = localStorage.getItem('userEmail');
+    var storedCurrentAddress = localStorage.getItem('userAddress');
+    var storedGender = localStorage.getItem('userGender');
+    var storedDob = localStorage.getItem('userBirthday');
 
-        function closeDeleteModal() {
-            deleteModal.style.display = 'none';
-        }
+        // Update elements with user information
+        fullNameElement.textContent = storedFullName;
+        emailElement.textContent = storedEmail;
+        currentAddressElement.textContent = storedCurrentAddress;
+        genderElement.textContent = storedGender;
+        dobElement.textContent = storedDob;
+    }
+  
+    // Function to handle editing user information
+    function editUserInformation() {
+        // Get input values
+        var fullName = document.getElementById('edit-fullName').value;
+        var email = document.getElementById('edit-email').value;
+        var currentAddress = document.getElementById('edit-currentAddress').value;
 
-        function confirmDelete() {
-            // Check if the delete password matches the stored password
-            if (deletePasswordInput.value !== storedUserInfo.password) {
-                alert('Incorrect password. Account not deleted.');
-                closeDeleteModal();
-                return;
-            }
+       // Update user information in Local Storage if values are not empty
+       if (fullName.trim() !== '') {
+        localStorage.setItem('userFullName', fullName.trim());
+    }
+    if (email.trim() !== '') {
+        localStorage.setItem('userEmail', email.trim());
+    }
+    if (currentAddress.trim() !== '') {
+        localStorage.setItem('userCurrentAddress', currentAddress.trim());
+    }
 
-            // Delete the user account from local storage
-            localStorage.removeItem('userInfo');
+    // Update the displayed user information
+    updateUserInfo();
 
-            // Close the delete modal
-            closeDeleteModal();
+    // Close the edit modal
+    $('#edit-modal').modal('hide');
+}
 
-            // Redirect to a thank you or login page
-            alert('Account deleted. Redirecting to thank you page or login page.');
-            // You may want to redirect to another page or perform additional actions here.
-        }
+// Function to initialize the edit modal with current user information
+function initializeEditModal() {
+    // Get user information from Local Storage
+    var storedFullName = localStorage.getItem('userFullName');
+    var storedEmail = localStorage.getItem('userEmail');
+    var storedCurrentAddress = localStorage.getItem('userCurrentAddress');
 
-        function saveUserInformation() {
-            // Check if the current password matches the stored password
-            if (currentPasswordInput.value !== storedUserInfo.password) {
-                alert('Incorrect current password. Changes not saved.');
-                return;
-            }
 
-            // Check if the new password and confirm new password match
-            if (newPasswordInput.value !== confirmNewPasswordInput.value) {
-                alert('New password and confirm new password do not match. Changes not saved.');
-                return;
-            }
+    // Set input values in the edit modal
+    document.getElementById('edit-fullName').value = storedFullName;
+    document.getElementById('edit-email').value = storedEmail;
+    document.getElementById('edit-currentAddress').value = storedCurrentAddress;
+}
 
-            const newUserInfo = {
-                picture: getImageDataUrl(pictureInput.files[0]) || storedUserInfo.picture || 'default.jpg',
-                fullName: fullNameInput.value,
-                email: emailInput.value,
-                currentAddress: currentAddressInput.value,
-                gender: genderInput.value,
-                dob: dobInput.value,
-                password: newPasswordInput.value || storedUserInfo.password
-            };
+// Function to handle deleting user information
+function deleteUserInformation() {
+    // Get the entered password
+    var enteredPassword = prompt('Enter your password to confirm account deletion:');
 
-            localStorage.setItem('userInfo', JSON.stringify(newUserInfo));
+    // Check if entered password matches the stored password
+    var storedPassword = localStorage.getItem('userPassword');
+    if (enteredPassword === storedPassword) {
+        // Passwords match, delete the account
+        localStorage.clear();
 
-            // Update the displayed information
-            document.getElementById('user-picture').src = newUserInfo.picture;
-            document.getElementById('fullName').innerText = newUserInfo.fullName;
-            document.getElementById('email').innerText = newUserInfo.email;
-            document.getElementById('currentAddress').innerText = newUserInfo.currentAddress;
-            document.getElementById('gender').innerText = newUserInfo.gender;
-            document.getElementById('dob').innerText = newUserInfo.dob;
+        // Update the displayed user information (which will now be empty)
+        updateUserInfo();
 
-            // Close the edit modal
-            closeEditModal();
-        }
+        // Close the delete modal
+        $('#delete-modal').modal('hide');
 
-        function getImageDataUrl(file) {
-            if (!file) return null;
-            const reader = new FileReader();
-            return new Promise((resolve) => {
-                reader.onloadend = () => {
-                    resolve(reader.result);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
+        alert('Account deleted successfully.');
+    } else {
+        // Passwords do not match, show an alert
+        alert('Incorrect password. Account deletion canceled.');
+    }
+}
+
+// Function to initialize user information on page load
+function initializeUserInfo() {
+    // Check if user information is already stored in Local Storage
+    if (localStorage.getItem('userFullName')) {
+        // If yes, update the displayed user information
+        updateUserInfo();
+    }
+}
+
+// Call the initialize function when the page loads
+window.onload = initializeUserInfo;

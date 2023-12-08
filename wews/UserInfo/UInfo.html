@@ -57,7 +57,8 @@
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h5 class="modal-title">Edit User Information</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+               
+
                 </div>
 
                 <!-- Modal Body -->
@@ -78,21 +79,10 @@
                             <input type="text" id="edit-currentAddress" class="form-control" placeholder="Enter current address">
                         </div>
 
-                        <div class="form-group">
-                            <label for="edit-gender">Gender:</label>
-                            <select id="edit-gender" class="form-control">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="edit-dob">Date of Birth:</label>
-                            <input type="date" id="edit-dob" class="form-control">
-                        </div>
 
-                        <button type="button" class="btn btn-primary" onclick="saveUserInformation()">Save Changes</button>
+                        <button type="button" class="btn btn-primary" onclick="editUserInformation()">Save Changes</button>
+
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     </form>
                 </div>
@@ -113,13 +103,13 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <p>Are you sure you want to delete your account?</p>
-                    <label for="delete-password">Enter your password to confirm:</label>
-                    <input type="password" id="delete-password" class="form-control" placeholder="Enter your password">
+                  
                 </div>
 
                 <!-- Modal Footer -->
                 <div class="modal-footer">
-                    <button id="confirm-delete-button" class="btn btn-danger" onclick="confirmDelete()">Delete Account</button>
+                    <button id="confirm-delete-button" class="btn btn-danger" onclick="deleteUserInformation()">Delete Account</button>
+
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
