@@ -1,0 +1,124 @@
+
+body {
+    background: url('assets/spave.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Your Stylish Font', sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.navbar {
+    background-color: #0075b7;
+}
+
+.navbar-brand img {
+    width: 150px;
+}
+
+.nav-link {
+    color: #fff !important;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff;
+}
+
+.login-form {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    color: #fff;
+    width: 400px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+}
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form input, .login-form button {
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.login-form input {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+.login-form button {
+    background-color: #0075b7;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+    background-color: #00568c;
+}
+
+.registration-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.registration-link a {
+    color: #0075b7;
+    text-decoration: none;
+}
+
+.registration-link a:hover {
+    text-decoration: underline;
+}
+
+.registration-modal .modal-dialog {
+    max-width: 400px;
+}
+
+.registration-modal .modal-content {
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 10px;
+    color: #000000;
+}
+
+.registration-modal .modal-header {
+    border: none;
+}
+
+.registration-modal .modal-title {
+    color: #000000;
+}
+
+.registration-modal .form-control {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 5px;
+    color: #020202;
+}
+
+.registration-modal .btn-primary {
+    background-color: #0075b7;
+    border: none;
+    border-radius: 5px;
+}
+
+.registration-modal .btn-primary:hover {
+    background-color: #00568c;
+}
+label {
+    color: #000000;
+}
