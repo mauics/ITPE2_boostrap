@@ -95,6 +95,8 @@ function deleteUserInformation() {
         // Passwords match, delete the account
         localStorage.clear();
 
+        window.location.href = '../Login/Login.html'; 
+
         // Update the displayed user information (which will now be empty)
         updateUserInfo();
 

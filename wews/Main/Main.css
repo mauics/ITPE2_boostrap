@@ -94,3 +94,11 @@ footer {
     padding: 2rem 0;
     text-align: center;
 }
+
+
+    #playPauseButton {
+      font-size: 20px;
+      padding: 10px 15px;
+      margin-left: 10px; /* Add margin to the left for spacing */
+    }
+    

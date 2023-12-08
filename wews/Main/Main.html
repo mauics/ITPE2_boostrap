@@ -167,15 +167,57 @@
             </div>
         </div>
     </div>
-
+      <!-- Background Music -->
+      <div id="controls">
+        <!-- Play/Pause Button -->
+        <button class="btn btn-primary" id="playPauseButton" onclick="togglePlayPause()">
+          <i class="fas fa-play"></i> <!-- Font Awesome play icon -->
+        </button>
+      </div>
     
-
+      <!-- Background Music -->
+      <audio id="backgroundMusic" loop>
+        <source src="../assets/themesong.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+      </audio>
     <!-- Bootstrap and Font Awesome -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
  
 
     <!-- JavaScript -->
     <script src="Main.js"></script> 
+
+    <script>
+     var audio = document.getElementById('backgroundMusic');
+    var playPauseButton = document.getElementById('playPauseButton');
+
+    function togglePlayPause() {
+      if (audio.paused) {
+        audio.play();
+        playPauseButton.innerHTML = '<i class="fas fa-pause"></i>'; // Font Awesome pause icon
+      } else {
+        audio.pause();
+        playPauseButton.innerHTML = '<i class="fas fa-play"></i>'; // Font Awesome play icon
+      }
+    }
+
+    function toggleVolume() {
+      var volumeControl = document.getElementById('volumeControl');
+      volumeControl.style.display = (volumeControl.style.display === 'none') ? 'block' : 'none';
+    }
+
+    function changeVolume() {
+      var volumeControl = document.getElementById('volumeControl');
+      audio.volume = volumeControl.value;
+    }
+
+    // Set the initial volume to 40%
+    audio.volume = 0.4;
+    document.getElementById('volumeControl').value = 0.4;
+  </script>
+
+
 </body>
 </html>
