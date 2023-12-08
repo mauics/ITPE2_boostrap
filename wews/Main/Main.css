@@ -101,4 +101,8 @@ footer {
       padding: 10px 15px;
       margin-left: 10px; /* Add margin to the left for spacing */
     }
-    
+
+    img {
+        width: 10%;
+        height: 10%;
+    }

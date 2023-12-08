@@ -1,8 +1,8 @@
 // Sample product data (you can replace it with actual data from a database)
 const products = [
-    { name: 'Original Flavor', price: 5.99 },
-    { name: 'Sour Cream', price: 6.99 },
-    { name: 'Cheese', price: 7.99 },
+    { name: 'Original Flavor', price: 130.00 },
+    { name: 'Sour Cream', price: 140.00 },
+    { name: 'Cheese', price: 150.00 },
     // Add other products here
 ];
 
