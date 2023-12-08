@@ -78,4 +78,7 @@ footer {
     background:  white;
 }
 
-
+.row{
+    
+    justify-content: center;
+}
