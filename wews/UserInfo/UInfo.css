@@ -136,3 +136,9 @@ body {
     background-color: #e74c3c;
     margin-right: 10px;
 }
+
+@media screen and (max-width: 600px) {
+    #user-info-container {
+        max-width: 100%;
+    }
+}
