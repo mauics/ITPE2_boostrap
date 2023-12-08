@@ -1,20 +1,5 @@
-console.log("Hello World");
 
-let name = "Maui";
-let age = 18;
-let isSingle = true;
-let hobbies = ["Dotes", "Reading"]; 
-
-let myobject = {
-myName: name,
-age,
-isSingle,
-hobbies,
-};
-
-//console.log(myobject);
-
-function register () {
+function register() {
     let Modalname = document.querySelector("#Modalname");
     let Modalemail = document.querySelector("#Modalemail");
     let Modalpassword = document.querySelector("#Modalpassword");
@@ -23,15 +8,14 @@ function register () {
     let genderInputs = document.getElementsByName("gender");
     let birthdayInput = document.querySelector("#birthday");
 
-
-let user = {
-    email: Modalemail.value,
-    name: Modalname.value,
-    password: Modalpassword.value,
-    confirmPassword: ModalconfirmPassword.value,
-    address: ModalAdrress.value,
-    gender: getSelectedRadioValue(genderInputs),
-    birthday: birthdayInput.value,
+    let user = {
+        email: Modalemail.value,
+        name: Modalname.value,
+        password: Modalpassword.value,
+        confirmPassword: ModalconfirmPassword.value,
+        address: ModalAdrress.value,
+        gender: getSelectedRadioValue(genderInputs),
+        birthday: birthdayInput.value,
     };
 
     if (!user.email) {
@@ -50,12 +34,10 @@ let user = {
         return alert('Password does not match');
     }
 
+    alert(`Welcome ${user.name}. You have been successfully registered.`);
 
-
-alert(`Welcome ${user.name}. You have been succesfully registerd.`);
-
- localStorage.setItem("user", JSON.stringify(user));
- //console.log("Button register is clicked", user);
+    localStorage.setItem("user", JSON.stringify(user));
+    //console.log("Button register is clicked", user);
 }
 
 function getSelectedRadioValue(radioInputs) {
@@ -67,11 +49,85 @@ function getSelectedRadioValue(radioInputs) {
     return null;
 }
 
-
 let btnModalRegister = document.querySelector('#btnModalRegister');
 
 btnModalRegister.onclick = () => {
     register();
 };
+ // Function to handle user registration.
+ document.getElementById('btnModalRegister').addEventListener('click', function () {
+    registerUser();
+});
 
-//console.log(JSON.parse(localStorage.getItem("user")));
+// Function to handle login form submission.
+document.getElementById('loginForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    loginUser();
+});
+
+// Function to handle user registration.
+function registerUser() {
+    const fullName = document.getElementById('Modalname').value;
+    const email = document.getElementById('Modalemail').value;
+    const password = document.getElementById('Modalpassword').value;
+    const confirmPassword = document.getElementById('ModalconfirmPassword').value;
+    const address = document.getElementById('ModalAddress').value;
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+    const birthday = document.getElementById('birthday').value;
+    const role = document.getElementById('Modalrole').value;
+
+
+    // Save user registration status, role, and other details to local storage.
+    localStorage.setItem('isRegistered', 'true');
+    localStorage.setItem('userRole', role);
+    localStorage.setItem('userFullName', fullName);
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userPassword', password);
+    localStorage.setItem('userConfirmPassword', confirmPassword);
+    localStorage.setItem('userAddress', address);
+    localStorage.setItem('userGender', gender); 
+    localStorage.setItem('userBirthday', birthday)    
+
+    
+
+
+    // Refresh the page to show the appropriate content.
+    location.reload();
+}
+
+// Function to handle login form submission.
+function loginUser() {
+    const emailInput = document.querySelector('#loginForm input[type="email"]');
+    const passwordInput = document.querySelector('#loginForm input[type="password"]');
+
+    // Check if the user is registered
+    const isRegistered = localStorage.getItem('isRegistered') === 'true';
+
+    if (isRegistered) {
+        const storedEmail = localStorage.getItem('userEmail');
+        const storedPassword = localStorage.getItem('userPassword');
+
+        // Check if the provided credentials match the stored credentials
+        if (emailInput.value === storedEmail && passwordInput.value === storedPassword) {
+            const userRole = localStorage.getItem('userRole');
+            const userFullName = localStorage.getItem('userFullName');
+
+            // Redirect based on user role
+            if (userRole === 'buyer') {
+                // Redirect to the buyer page
+                window.location.href = '../Main/Main.html';
+            } else if (userRole === 'seller') {
+                // Redirect to the seller page
+                window.location.href = '../Welcome/Welcome.html';
+            } else {
+                console.log('Invalid user role.');
+            }
+
+            console.log(`Welcome back, ${userFullName}! You are a ${userRole}.`);
+        } else {
+            console.log('Invalid email or password.');
+        }
+    } else {
+        console.log('User is not registered. Please register first.');
+    }
+}
