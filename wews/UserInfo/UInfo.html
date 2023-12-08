@@ -4,78 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Information</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="UInfo.css">
 </head>
 <body>
-    <div id="user-info-container">
-        <img id="user-picture" src="user.jpg" alt="User Picture">
-        <div id="user-details">
-            <p><strong>Full Name:</strong> <span id="fullName"></span></p>
-            <p><strong>Email Address:</strong> <span id="email"></span></p>
-            <p><strong>Current Address:</strong> <span id="currentAddress"></span></p>
-            <p><strong>Gender:</strong> <span id="gender"></span></p>
-            <p><strong>Date of Birth:</strong> <span id="dob"></span></p>
-            <button id="edit-button" onclick="openEditModal()">Edit</button>
-            <button id="delete-button" onclick="openDeleteModal()">Delete Account</button>
+
+    <!-- Bootstrap Top Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">User Info</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
         </div>
-    </div>
+    </nav>
 
-    <div id="edit-modal">
-        <div id="edit-form">
-            <h2>Edit User Information</h2>
-            <label for="edit-picture">Profile Picture:</label>
-            <input type="file" id="edit-picture" accept="image/*">
-            
-            <label for="edit-fullName">Full Name:</label>
-            <input type="text" id="edit-fullName" placeholder="Enter full name">
-
-            <label for="edit-email">Email Address:</label>
-            <input type="email" id="edit-email" placeholder="Enter email address">
-
-            <label for="edit-currentAddress">Current Address:</label>
-            <input type="text" id="edit-currentAddress" placeholder="Enter current address">
-
-            <div class="row">
-                <div>
-                    <label for="edit-gender">Gender:</label>
-                    <select id="edit-gender">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="edit-dob">Date of Birth:</label>
-                    <input type="date" id="edit-dob">
+    <!-- User Information Container -->
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-4">
+                <img id="user-picture" src="user.jpg" alt="User Picture" class="img-fluid rounded-circle">
+            </div>
+            <div class="col-md-8">
+                <div id="user-details">
+                    <p><strong>Full Name:</strong> <span id="fullName"></span></p>
+                    <p><strong>Email Address:</strong> <span id="email"></span></p>
+                    <p><strong>Current Address:</strong> <span id="currentAddress"></span></p>
+                    <p><strong>Gender:</strong> <span id="gender"></span></p>
+                    <p><strong>Date of Birth:</strong> <span id="dob"></span></p>
+                    <button id="edit-button" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal">Edit</button>
+                    <button id="delete-button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">Delete Account</button>
                 </div>
             </div>
-
-            <label for="edit-currentPassword">Current Password:</label>
-            <input type="password" id="edit-currentPassword" placeholder="Enter current password">
-
-            <label for="edit-newPassword">New Password:</label>
-            <input type="password" id="edit-newPassword" placeholder="Enter new password">
-
-            <label for="edit-confirmNewPassword">Confirm New Password:</label>
-            <input type="password" id="edit-confirmNewPassword" placeholder="Confirm new password">
-
-            <button id="save-button" onclick="saveUserInformation()">Save Changes</button>
-            <button id="cancel-edit-button" onclick="closeEditModal()">Cancel</button>
         </div>
     </div>
 
-    <div id="delete-modal">
-        <div id="delete-form">
-            <h2>Delete Account</h2>
-            <p>Are you sure you want to delete your account?</p>
-            <label for="delete-password">Enter your password to confirm:</label>
-            <input type="password" id="delete-password" placeholder="Enter your password">
-            <div class="row">
-                <button id="confirm-delete-button" onclick="confirmDelete()">Delete Account</button>
-                <button id="cancel-delete-button" onclick="closeDeleteModal()">Cancel</button>
+    <!-- Edit Modal -->
+    <div class="modal" id="edit-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit User Information</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="edit-fullName">Full Name:</label>
+                            <input type="text" id="edit-fullName" class="form-control" placeholder="Enter full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-email">Email Address:</label>
+                            <input type="email" id="edit-email" class="form-control" placeholder="Enter email address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-currentAddress">Current Address:</label>
+                            <input type="text" id="edit-currentAddress" class="form-control" placeholder="Enter current address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-gender">Gender:</label>
+                            <select id="edit-gender" class="form-control">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-dob">Date of Birth:</label>
+                            <input type="date" id="edit-dob" class="form-control">
+                        </div>
+
+                        <button type="button" class="btn btn-primary" onclick="saveUserInformation()">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Delete Modal -->
+    <div class="modal" id="delete-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Account</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <p>Are you sure you want to delete your account?</p>
+                    <label for="delete-password">Enter your password to confirm:</label>
+                    <input type="password" id="delete-password" class="form-control" placeholder="Enter your password">
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button id="confirm-delete-button" class="btn btn-danger" onclick="confirmDelete()">Delete Account</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script src="UInfo.js"></script>
 
