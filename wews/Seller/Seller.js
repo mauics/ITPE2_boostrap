@@ -1,4 +1,4 @@
-const user = JSON.parse(localStorage.getItem('user'));
+const user = JSON.parse(localStorage.getItem('users'));
 
    if (user) {
        const userButton = document.getElementById('userDropdown');

@@ -44,14 +44,15 @@ document.addEventListener('DOMContentLoaded', function () {
         updateCart();
     });
 
-    // Check if a user is logged in
    // Check if a user is logged in
-   const user = JSON.parse(localStorage.getItem('user'));
+   const user = JSON.parse(localStorage.getItem('users'));
 
-   if (user) {
-       const userButton = document.getElementById('userDropdown');
-       userButton.innerHTML = `<i class="fas fa-user"></i> ${user.name}`;
-   }
+   const loggedInUser = users.find(user => user.email === loggedInUserEmail);
+   
+   if (loggedInUser) {
+    const userButton = document.getElementById('userDropdown');
+    userButton.innerHTML = `<i class="fas fa-user"></i> ${loggedInUser.fullName}`;
+}
    
 
     // Event listener for logging out
@@ -67,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = '../Welcome/Welcome.html';
     });
 
-    // Event delegation for updating quantities and removing items from the cart
+    // Event updating quantities and removing items from the cart
     var cartItems = document.getElementById('cart-items');
     cartItems.addEventListener('click', function (event) {
         if (event.target.classList.contains('remove-from-cart')) {
@@ -87,8 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         updateCart();
     });
-
-    // ... (existing logic)
 });
 
 // Function to update the cart UI and counter
