@@ -97,6 +97,10 @@ function loginUser() {
             const userRole = user.role;
             const userFullName = user.fullName;
 
+
+        
+
+
             // Redirect based on user role
             if (userRole === 'buyer') {
                 // Redirect to the buyer page

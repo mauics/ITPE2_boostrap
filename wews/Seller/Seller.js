@@ -1,22 +1,37 @@
-const user = JSON.parse(localStorage.getItem('users'));
-
-   if (user) {
-       const userButton = document.getElementById('userDropdown');
-       userButton.innerHTML = `<i class="fas fa-user"></i> ${user.name}`;
-   }
+const users = JSON.parse(localStorage.getItem('users')) || [];
    
+   const loggedInUser = users.find(user => user.email === loggedInUserEmail);
+   
+   if (loggedInUser) {
+       const userButton = document.getElementById('userDropdown');
+       userButton.innerHTML = `<i class="fas fa-user"></i> ${loggedInUser.fullName}`;
+
+       updateLoggedInUserName(users.fullName);
+
+       document.getElementById('userEmailDisplay').innerText = loggedInUser.fullName;
+   }
 
     // Event listener for logging out
     var logoutButton = document.getElementById('logoutButton');
     logoutButton.addEventListener('click', function () {
-  
-        if (user) {
-            alert(`Goodbye, ${user.name}!`);
+        // In a real-world scenario, you'd implement the logout logic here
+        const loggedInUserName = localStorage.getItem('userFullName');
+        if (loggedInUserName) {
+            alert(`Goodbye, ${loggedInUserName}!`);
         }
-   
+        // Clear user data from local storage
         localStorage.removeItem('userFullName');
-  
-        window.location.href = '../Login/Login.html';
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userPassword');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userAddress');
+        localStorage.removeItem('userBirthday');
+        localStorage.removeItem('userRole');
+
+        // Redirect to the welcome page (replace 'welcome.html' with the actual page URL)
+        window.location.href = '../Welcome/Welcome.html';
+        
+        location.reload();
     });
 
 
