@@ -1,129 +1,156 @@
-const users = JSON.parse(localStorage.getItem('users')) || [];
-   
-   const loggedInUser = users.find(user => user.email === loggedInUserEmail);
-   
-   if (loggedInUser) {
-       const userButton = document.getElementById('userDropdown');
-       userButton.innerHTML = `<i class="fas fa-user"></i> ${loggedInUser.fullName}`;
+  // Event listener for logging out
+document.getElementById('logoutButton').addEventListener('click', function () {
+    // Clear user data from local storage
+    localStorage.removeItem('userData');
 
-       updateLoggedInUserName(users.fullName);
+    // Redirect to the welcome page (replace 'welcome.html' with the actual page URL)
+    window.location.href = '../Welcome/Welcome.html';
+});
 
-       document.getElementById('userEmailDisplay').innerText = loggedInUser.fullName;
-   }
 
-    // Event listener for logging out
-    var logoutButton = document.getElementById('logoutButton');
-    logoutButton.addEventListener('click', function () {
-        // In a real-world scenario, you'd implement the logout logic here
-        const loggedInUserName = localStorage.getItem('userFullName');
-        if (loggedInUserName) {
-            alert(`Goodbye, ${loggedInUserName}!`);
-        }
-        // Clear user data from local storage
-        localStorage.removeItem('userFullName');
-        localStorage.removeItem('userEmail');
-        localStorage.removeItem('userPassword');
-        localStorage.removeItem('userEmail');
-        localStorage.removeItem('userAddress');
-        localStorage.removeItem('userBirthday');
-        localStorage.removeItem('userRole');
+document.addEventListener('DOMContentLoaded', function () {
+    const addProductForm = document.getElementById('addProductForm');
+    const productListRow = document.getElementById('productList');
+    const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
 
-        // Redirect to the welcome page (replace 'welcome.html' with the actual page URL)
-        window.location.href = '../Welcome/Welcome.html';
-        
-        location.reload();
+    // Display existing products on page load
+    storedProducts.forEach((product, index) => {
+        displayProduct(product, index);
     });
 
+    addProductForm.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-    // Add product function 
-    document.addEventListener('DOMContentLoaded', function () {
-        const addProductForm = document.getElementById('addProductForm');
-        const productListRow = document.getElementById('productList');
-        const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
+        // Get values from the form
+        const productName = document.getElementById('productName').value;
+        const productPrice = document.getElementById('productPrice').value;
+        const productImage = document.getElementById('productImage').files[0];
 
-        // Display existing products on page load
-        storedProducts.forEach(product => {
-            displayProduct(product);
-        });
+        // Validate if an image is selected
+        if (!productImage) {
+            alert('Please select an image.');
+            return;
+        }
 
-        addProductForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            
+        // Save the product to local storage
+        const newProduct = {
+            name: productName,
+            price: productPrice,
+            image: URL.createObjectURL(productImage)
+        };
 
-            // Get values from the form
-            const productName = document.getElementById('productName').value;
-            const productPrice = document.getElementById('productPrice').value;
-            const productImage = document.getElementById('productImage').files[0];
+        storedProducts.push(newProduct);
+        localStorage.setItem('products', JSON.stringify(storedProducts));
 
-            // Validate if an image is selected
-            if (!productImage) {
-                alert('Please select an image.');
-                return;
-            }
+        // Display the new product
+        displayProduct(newProduct, storedProducts.length - 1);
 
-            // Save the product to local storage
-            const newProduct = {
-                name: productName,
-                price: productPrice,
-                image: URL.createObjectURL(productImage)
-            };
+        // Clear the form fields
+        addProductForm.reset();
+    });
 
-            storedProducts.push(newProduct);
+    // Event delegation for delete and edit buttons
+    productListRow.addEventListener('click', function (event) {
+        const target = event.target;
+
+        if (target.classList.contains('btn-delete')) {
+            // Delete button clicked
+            const productIndex = target.dataset.index;
+            storedProducts.splice(productIndex, 1);
             localStorage.setItem('products', JSON.stringify(storedProducts));
+            displayProducts();
+        } else if (target.classList.contains('btn-edit')) {
+            // Edit button clicked
+            const productIndex = target.dataset.index;
+            const editModal = document.getElementById('editModal');
 
-            // Display the new product
-            displayProduct(newProduct);
+            // Pre-fill the edit modal with the selected product details
+            document.getElementById('editProductName').value = storedProducts[productIndex].name;
+            document.getElementById('editProductPrice').value = storedProducts[productIndex].price;
 
-            // Clear the form fields
-            addProductForm.reset();
+            // Save the current index as a data attribute in the modal
+            editModal.dataset.index = productIndex;
 
-        });
-
-        // Function to display a product
-        function displayProduct(product) {
-            const col = document.createElement('div');
-            col.classList.add('col-md-4', 'mb-4');
-
-            const card = document.createElement('div');
-            card.classList.add('card');
-            
-            const deleteButton = document.createElement('button');
-            deleteButton.classList.add('btn', 'btn-danger');
-            deleteButton.textContent = 'Delete';
-
-            const editButton = document.createElement('button');
-            editButton.classList.add('btn', 'btn-primary', 'mr-2');
-            editButton.textContent = 'Edit';
-        
-            const img = document.createElement('img');
-            img.src = product.image;
-            img.alt = 'Product Image';
-            img.classList.add('card-img-top');
-            
-
-            const cardBody = document.createElement('div');
-            cardBody.classList.add('card-body');
-
-            const title = document.createElement('h5');
-            title.classList.add('card-title');
-            title.textContent = product.name;
-
-            const price = document.createElement('p');
-            price.classList.add('card-text');
-            price.textContent = `₱${product.price}`;
-            
-            cardBody.appendChild(title);
-            cardBody.appendChild(price);
-            cardBody.appendChild(editButton);
-            cardBody.appendChild(deleteButton);
-
-            card.appendChild(img);
-            card.appendChild(cardBody);
-
-            col.appendChild(card);
-            productListRow.appendChild(col);
+            // Open the edit modal
+            $(editModal).modal('show');
         }
     });
+
+    // Function to display products
+    function displayProducts() {
+        productListRow.innerHTML = ''; // Clear existing products
+
+        storedProducts.forEach((product, index) => {
+            displayProduct(product, index);
+        });
+    }
+
+    // Function to display a product
+    function displayProduct(product, index) {
+        const col = document.createElement('div');
+        col.classList.add('col-md-4', 'mb-4');
+
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('btn', 'btn-danger', 'btn-delete');
+        deleteButton.textContent = 'Delete';
+        deleteButton.dataset.index = index;
+
+        const editButton = document.createElement('button');
+        editButton.classList.add('btn', 'btn-primary', 'mr-2', 'btn-edit');
+        editButton.textContent = 'Edit';
+        editButton.dataset.index = index;
+
+        const img = document.createElement('img');
+        img.src = product.image;
+        img.alt = 'Product Image';
+        img.classList.add('card-img-top');
+
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+
+        const title = document.createElement('h5');
+        title.classList.add('card-title');
+        title.textContent = product.name;
+
+        const price = document.createElement('p');
+        price.classList.add('card-text');
+        price.textContent = `₱${product.price}`;
+
+        cardBody.appendChild(title);
+        cardBody.appendChild(price);
+        cardBody.appendChild(editButton);
+        cardBody.appendChild(deleteButton);
+
+        card.appendChild(img);
+        card.appendChild(cardBody);
+
+        col.appendChild(card);
+        productListRow.appendChild(col);
+    }
+
+     // Edit modal save changes button click event
+     const editModalSaveButton = document.getElementById('editModalSaveButton');
+     editModalSaveButton.addEventListener('click', function () {
+         const editModal = document.getElementById('editModal');
+         const productIndex = editModal.dataset.index;
+ 
+         // Update the product details
+         storedProducts[productIndex].name = document.getElementById('editProductName').value;
+         storedProducts[productIndex].price = document.getElementById('editProductPrice').value;
+ 
+         localStorage.setItem('products', JSON.stringify(storedProducts));
+         displayProducts();
+
+         document.getElementById('editProductName').value = '';
+         document.getElementById('editProductPrice').value = '';
+ 
+         // Close the edit modal
+         $('#editModal').modal('hide');
+     });
+ });
 
     
 

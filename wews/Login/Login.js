@@ -1,4 +1,5 @@
-function register() {
+// Function to handle user registration.
+function registerUser() {
     const fullName = document.getElementById('Modalname').value;
     const email = document.getElementById('Modalemail').value;
     const password = document.getElementById('Modalpassword').value;
@@ -8,27 +9,29 @@ function register() {
     const birthday = document.getElementById('birthday').value;
     const role = document.getElementById('Modalrole').value;
 
-    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    const existingUsers = JSON.parse(localStorage.getItem('userList')) || [];
 
     const user = {
         fullName,
         email,
         password,
-        confirmPassword,
         address,
         gender: getSelectedRadioValue(genderInputs),
         birthday,
         role
     };
 
-    if (!user.email || !user.fullName || !user.password || !user.confirmPassword || !user.address || !user.gender || !user.birthday || user.password !== user.confirmPassword) {
+    if (!user.email || !user.fullName || !user.password || !user.address || !user.gender || !user.birthday || user.password !== confirmPassword) {
         return alert('Please fill in all the required fields correctly.');
     }
 
     existingUsers.push(user);
 
-    localStorage.setItem('users', JSON.stringify(existingUsers));
+    localStorage.setItem('userList', JSON.stringify(existingUsers));
 
+    alert(`Welcome ${user.fullName}. You have been successfully registered.`);
+
+    // Clear form fields
     document.getElementById('Modalname').value = '';
     document.getElementById('Modalemail').value = '';
     document.getElementById('Modalpassword').value = '';
@@ -40,53 +43,15 @@ function register() {
 
     // Reload the page or perform any other necessary actions
     location.reload();
-
-    alert(`Welcome ${user.fullName}. You have been successfully registered.`);
-
-    localStorage.setItem('isRegistered', 'true');
-    localStorage.setItem('userRole', role);
-    localStorage.setItem('userFullName', fullName);
-    localStorage.setItem('userEmail', email);
-    localStorage.setItem('userPassword', password);
-    localStorage.setItem('userConfirmPassword', confirmPassword);
-    localStorage.setItem('userAddress', address);
-    localStorage.setItem('userGender', user.gender);
-    localStorage.setItem('userBirthday', birthday);
 }
-
-function getSelectedRadioValue(radioInputs) {
-    for (let i = 0; i < radioInputs.length; i++) {
-        if (radioInputs[i].checked) {
-            return radioInputs[i].value;
-        }
-    }
-    return null;
-}
-
-let btnModalRegister = document.querySelector('#btnModalRegister');
-
-btnModalRegister.onclick = () => {
-    register();
-};
- // Function to handle user registration.
- document.getElementById('btnModalRegister').addEventListener('click', function () {
-    registerUser();
-});
 
 // Function to handle login form submission.
-document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-    loginUser();
-});
-
-
-// Function login form submission.
 function loginUser() {
     const emailInput = document.querySelector('#loginForm input[type="email"]');
     const passwordInput = document.querySelector('#loginForm input[type="password"]');
 
     // Retrieve the array of users from local storage
-    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const users = JSON.parse(localStorage.getItem('userList')) || [];
 
     // Find the user with the provided email
     const user = users.find(u => u.email === emailInput.value);
@@ -96,10 +61,6 @@ function loginUser() {
         if (passwordInput.value === user.password) {
             const userRole = user.role;
             const userFullName = user.fullName;
-
-
-        
-
 
             // Redirect based on user role
             if (userRole === 'buyer') {
@@ -120,3 +81,23 @@ function loginUser() {
         console.log('User not found. Please check your email or register.');
     }
 }
+
+// Helper function to get the value of the selected radio button
+function getSelectedRadioValue(radioInputs) {
+    for (let i = 0; i < radioInputs.length; i++) {
+        if (radioInputs[i].checked) {
+            return radioInputs[i].value;
+        }
+    }
+    return null;
+}
+
+// Attach event listeners
+document.getElementById('btnModalRegister').addEventListener('click', function () {
+    registerUser();
+});
+
+document.getElementById('loginForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    loginUser();
+});
