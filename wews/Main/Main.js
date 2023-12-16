@@ -39,48 +39,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var checkoutButton = document.querySelector('.checkout');
     checkoutButton.addEventListener('click', function () {
         // In a real-world scenario, you'd implement the checkout logic here
+
+        // Add the current cart items to the sales array
+        const currentSale = { date: new Date(), items: [...cart] };
+        saveSaleToLocalStorage(currentSale);
         alert('Thank you for your purchase!');
         cart.length = 0; // Clear the cart after checkout
         updateCart();
-    });
-
-   // Check if a user is logged in
-   const loggedInUserEmail = localStorage.getItem('userEmail');
-   const users = JSON.parse(localStorage.getItem('users')) || [];
-   
-   const loggedInUser = users.find(user => user.email === loggedInUserEmail);
-   
-   if (loggedInUser) {
-       const userButton = document.getElementById('userDropdown');
-       userButton.innerHTML = `<i class="fas fa-user"></i> ${loggedInUser.fullName}`;
-
-       updateLoggedInUserName(users.fullName);
-
-       document.getElementById('userEmailDisplay').innerText = loggedInUser.fullName;
-   }
-   
-
-    // Event listener for logging out
-    var logoutButton = document.getElementById('logoutButton');
-    logoutButton.addEventListener('click', function () {
-        // In a real-world scenario, you'd implement the logout logic here
-        const loggedInUserName = localStorage.getItem('userFullName');
-        if (loggedInUserName) {
-            alert(`Goodbye, ${loggedInUserName}!`);
-        }
-        // Clear user data from local storage
-        localStorage.removeItem('userFullName');
-        localStorage.removeItem('userEmail');
-        localStorage.removeItem('userPassword');
-        localStorage.removeItem('userEmail');
-        localStorage.removeItem('userAddress');
-        localStorage.removeItem('userBirthday');
-        localStorage.removeItem('userRole');
-
-        // Redirect to the welcome page (replace 'welcome.html' with the actual page URL)
-        window.location.href = '../Welcome/Welcome.html';
-        
-        location.reload();
     });
 
     // Event updating quantities and removing items from the cart
@@ -121,15 +86,34 @@ function updateCart() {
     cart.forEach((item, index) => {
         const listItem = document.createElement('li');
         listItem.className = 'list-group-item';
-    
+
         listItem.innerHTML += `${item.product.name} - ₱&nbsp;${(item.product.price * item.quantity).toFixed(2)} each - Quantity: ${item.quantity}`;
         listItem.innerHTML += ` <button class="btn btn-success btn-sm increase-quantity" data-index="${index}">+</button>`;
         listItem.innerHTML += ` <button class="btn btn-warning btn-sm decrease-quantity" data-index="${index}">-</button>`;
         listItem.innerHTML += ` <button class="btn btn-danger btn-sm remove-from-cart" data-index="${index}">X</button>`;
-    
+
         cartItems.appendChild(listItem);
     });
     // Calculate and display total
     const total = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
     cartTotal.textContent = total.toFixed(2);
 }
+
+// Function to save the sale to local storage
+function saveSaleToLocalStorage(sale) {
+    const sales = JSON.parse(localStorage.getItem('sales')) || [];
+    sales.push(sale);
+    localStorage.setItem('sales', JSON.stringify(sales));
+}
+
+
+
+// Event listener for logging out
+document.getElementById('logoutButton').addEventListener('click', function () {
+    // Clear user data from local storage
+    localStorage.removeItem('userData');
+
+    // Redirect to the welcome page (replace 'welcome.html' with the actual page URL)
+    window.location.href = '../Welcome/Welcome.html';
+});
+
